@@ -1,0 +1,11 @@
+# Dependency directories
+node_modules/
+lib/
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
