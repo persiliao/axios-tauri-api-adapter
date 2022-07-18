@@ -22,3 +22,9 @@ const client = axios.create({ adapter: axiosTauriApiAdapter });
 # Todo
 
 * [ ] Add tests
+
+# Resources
+
+* [Changelog](https://github.com/persiliao/axios-tauri-api-adapter/blob/master/CHANGELOG.md)
+* [Contributing Guide](https://github.com/persiliao/axios-tauri-api-adapter/blob/master/CONTRIBUTING.md)
+* [Code of Conduct](https://github.com/persiliao/axios-tauri-api-adapter/blob/master/CODE_OF_CONDUCT.md)
