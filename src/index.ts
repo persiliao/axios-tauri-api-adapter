@@ -1,8 +1,8 @@
 import { getClient, HttpVerb } from '@tauri-apps/api/http'
 import { AxiosBasicCredentials, AxiosPromise, AxiosRequestConfig } from 'axios'
-import buildUrl from 'build-url-ts'
 import { base64Encode, getTauriRequestData, getTauriResponseType } from './util'
 import { ReasonPhrases, StatusCodes } from 'http-status-codes'
+import { buildUrl } from './url'
 
 export interface Authorization {
   Authorization: string
