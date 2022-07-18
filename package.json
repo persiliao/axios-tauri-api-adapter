@@ -4,7 +4,10 @@
   "description": "Makes it easy to use Axios in Tauri App",
   "keywords": [
     "axios",
-    "tauri"
+    "tauri",
+    "api",
+    "http",
+    "adapter"
   ],
   "homepage": "https://github.com/persiliao/axios-tauri-api-adapter#readme",
   "bugs": {
