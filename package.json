@@ -28,6 +28,7 @@
     "build-prepare": "rimraf lib",
     "format": "prettier --write \"src/**/*.ts\"",
     "preinstall": "npx only-allow pnpm",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "prepare": "run-s format build-prepare build",
     "test": "jest --config jestconfig.json"
   },
