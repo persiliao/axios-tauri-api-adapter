@@ -1,4 +1,9 @@
 # axios-tauri-api-adapter
+
+[![](https://img.shields.io/npm/v/axios-tauri-api-adapter)](https://www.npmjs.com/package/axios-tauri-api-adapter)
+![](https://img.shields.io/npm/dw/axios-tauri-api-adapter)
+![](https://img.shields.io/npm/l/axios-tauri-api-adapter)
+
 Makes it easy to use Axios in Tauri, support Typescript
 
 # Installation
