@@ -14,10 +14,30 @@ npm install axios-tauri-api-adapter
 
 # Usage
 
+###  **TypeScript / JavaScript**
+
 ```js
 import axios from 'axios';
 import axiosTauriApiAdapter from 'axios-tauri-api-adapter';
 const client = axios.create({ adapter: axiosTauriApiAdapter });
+```
+
+### **Tauri App**
+
+Add the following configuration to the `tauri.config.json` [See Details](https://tauri.app/v1/api/config#httpallowlistconfig)
+
+```json5
+{
+  "tauri": {
+    "allowlist": {
+      "http": {
+        "all": true, // Use this flag to enable all HTTP API features.
+        "request": true, // Allows making HTTP requests.
+        "scope": ["https://example.com/*"] // access scope for the HTTP APIs.
+      }
+    }
+  }
+}
 ```
 
 # Features
