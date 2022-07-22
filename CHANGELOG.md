@@ -1,3 +1,10 @@
+## 0.1.2 (2022-07-22)
+
+### Refactor
+
+* Refactor build request url ([6844185](https://github.com/persiliao/axios-tauri-api-adapter/commit/6844185720314cbe5456fdfb7076060e141cd2b1))
+
+
 ## 0.1.1 (2022-07-18)
 
 
