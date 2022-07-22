@@ -1,30 +1,14 @@
 import { getClient, HttpVerb } from '@tauri-apps/api/http'
-import { AxiosBasicCredentials, AxiosPromise, AxiosRequestConfig } from 'axios'
-import { base64Encode, getTauriRequestData, getTauriResponseType } from './util'
+import { AxiosPromise } from 'axios'
 import { ReasonPhrases, StatusCodes } from 'http-status-codes'
-import { buildUrl } from './url'
-
-export interface Authorization {
-  Authorization: string
-}
-
-export function generateBasicAuthorization(basicCredentials: AxiosBasicCredentials): Authorization {
-  const username = basicCredentials.username || ''
-  const password = basicCredentials.password ? encodeURIComponent(basicCredentials.password) : ''
-  return {
-    Authorization: `Basic ${base64Encode(`${username}:${password}`)}`,
-  }
-}
-
-export function generateJWTAuthorization(jwt: string): Authorization {
-  return {
-    Authorization: `Bearer ${jwt}`,
-  }
-}
-
-export interface TauriAxiosRequestConfig extends AxiosRequestConfig {
-  jwt?: string
-}
+import { TauriAxiosRequestConfig } from './type'
+import {
+  generateBasicAuthorization,
+  generateJWTAuthorization,
+  generateUrl,
+  getTauriRequestData,
+  getTauriResponseType,
+} from './util'
 
 export const axiosTauriApiAdapter = (config: TauriAxiosRequestConfig): AxiosPromise =>
   new Promise(async (resolve, reject) => {
@@ -46,7 +30,7 @@ export const axiosTauriApiAdapter = (config: TauriAxiosRequestConfig): AxiosProm
         },
         responseType: getTauriResponseType(config.responseType),
         timeout: timeout,
-        url: buildUrl(config.baseURL, { path: config.url, queryParams: config.params }),
+        url: generateUrl(config),
         method: <HttpVerb>config.method?.toUpperCase(),
       })
       .then((response) => {
