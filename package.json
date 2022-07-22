@@ -1,6 +1,6 @@
 {
   "name": "axios-tauri-api-adapter",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Makes it easy to use Axios in Tauri App",
   "keywords": [
     "axios",
