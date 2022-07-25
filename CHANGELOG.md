@@ -1,3 +1,10 @@
+## 0.1.3 (2022-07-25)
+
+### Bug Fixes
+
+* Failed requests are now properly returned ([68c003f](https://github.com/persiliao/axios-tauri-api-adapter/commit/68c003feb85b20af858245f8c3b067e22a99f20f))
+
+
 ## 0.1.2 (2022-07-22)
 
 ### Refactor
@@ -6,7 +13,6 @@
 
 
 ## 0.1.1 (2022-07-18)
-
 
 ### Bug Fixes
 
