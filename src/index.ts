@@ -1,5 +1,5 @@
 import { getClient, HttpVerb } from '@tauri-apps/api/http'
-import { AxiosPromise } from 'axios'
+import { AxiosResponse, AxiosError, AxiosPromise } from 'axios'
 import { ReasonPhrases, StatusCodes } from 'http-status-codes'
 import { TauriAxiosRequestConfig } from './type'
 import {
@@ -36,13 +36,31 @@ export const axiosTauriApiAdapter = (config: TauriAxiosRequestConfig): AxiosProm
       .then((response) => {
         // @ts-ignore
         const statusText = ReasonPhrases[StatusCodes[response.status]]
-        return resolve({
-          data: response.data,
-          status: response.status,
-          statusText: statusText,
-          headers: response.headers,
-          config: config,
-        })
+        if (response.ok) {
+          return resolve({
+            data: response.data,
+            status: response.status,
+            statusText: statusText,
+            headers: response.headers,
+            config: config,
+          })
+        } else {
+          reject(
+            new AxiosError(
+              'Request failed with status code ' + response.status,
+              [AxiosError.ERR_BAD_REQUEST, AxiosError.ERR_BAD_RESPONSE][Math.floor(response.status / 100) - 4],
+              config,
+              client,
+              {
+                data: response.data,
+                status: response.status,
+                statusText: statusText,
+                headers: response.headers,
+                config: config,
+              }
+            )
+          )
+        }
       })
       .catch((error) => {
         return reject(error)
