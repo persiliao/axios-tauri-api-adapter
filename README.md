@@ -1,7 +1,6 @@
 # axios-tauri-api-adapter
 
 [![](https://img.shields.io/npm/v/axios-tauri-api-adapter)](https://www.npmjs.com/package/axios-tauri-api-adapter)
-[![](https://img.shields.io/npm/dw/axios-tauri-api-adapter)](https://www.npmjs.com/package/axios-tauri-api-adapter)
 [![](https://img.shields.io/npm/l/axios-tauri-api-adapter)](https://github.com/persiliao/axios-tauri-api-adapter/blob/master/LICENSE)
 
 Makes it easy to use Axios in Tauri App
@@ -43,10 +42,6 @@ Add the following configuration to the `tauri.config.json` [See Details](https:/
 # Features
 - HTTP Requests use `@tauri-apps/api/http` instead of `XHR(XMLHttpRequest)`
 - Add `config.jwt` It's going to add JWT to the header
-
-# Todo
-
-* [ ] Add tests
 
 # Resources
 
