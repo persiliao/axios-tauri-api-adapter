@@ -1,14 +1,8 @@
 import { getClient, HttpVerb } from '@tauri-apps/api/http'
-import { AxiosResponse, AxiosError, AxiosPromise } from 'axios'
+import { AxiosError, AxiosPromise } from 'axios'
 import { ReasonPhrases, StatusCodes } from 'http-status-codes'
 import { TauriAxiosRequestConfig } from './type'
-import {
-  generateBasicAuthorization,
-  generateJWTAuthorization,
-  generateUrl,
-  getTauriRequestData,
-  getTauriResponseType,
-} from './util'
+import { buildBasicAuthorization, buildJWTAuthorization, buildTauriRequestData, buillRequestUrl, getTauriResponseType } from './util'
 
 export const axiosTauriApiAdapter = (config: TauriAxiosRequestConfig): AxiosPromise =>
   new Promise(async (resolve, reject) => {
@@ -22,15 +16,15 @@ export const axiosTauriApiAdapter = (config: TauriAxiosRequestConfig): AxiosProm
 
     client
       .request({
-        body: getTauriRequestData(config.data),
+        body: buildTauriRequestData(config.data),
         headers: {
           ...config.headers,
-          ...(config.auth && generateBasicAuthorization(config.auth)),
-          ...(config.jwt && generateJWTAuthorization(config.jwt)),
+          ...(config.auth && buildBasicAuthorization(config.auth)),
+          ...(config.jwt && buildJWTAuthorization(config.jwt)),
         },
         responseType: getTauriResponseType(config.responseType),
         timeout: timeout,
-        url: generateUrl(config),
+        url: buillRequestUrl(config),
         method: <HttpVerb>config.method?.toUpperCase(),
       })
       .then((response) => {
