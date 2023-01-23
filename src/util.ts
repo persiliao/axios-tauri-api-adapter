@@ -1,5 +1,5 @@
-import { AxiosBasicCredentials, ResponseType as AxiosResponseType } from 'axios'
 import { Body, ResponseType as TauriResponseType } from '@tauri-apps/api/http'
+import { AxiosBasicCredentials, ResponseType as AxiosResponseType } from 'axios'
 import buildUrl, { IQueryParams } from 'build-url-ts'
 import URLParse from 'url-parse'
 import { Authorization, TauriAxiosRequestConfig } from './type'
@@ -7,7 +7,7 @@ import { Authorization, TauriAxiosRequestConfig } from './type'
 export const base64Decode = (str: string): string => Buffer.from(str, 'base64').toString('binary')
 export const base64Encode = (str: string): string => Buffer.from(str, 'binary').toString('base64')
 
-export function generateBasicAuthorization(basicCredentials: AxiosBasicCredentials): Authorization {
+export function buildBasicAuthorization(basicCredentials: AxiosBasicCredentials): Authorization {
   const username = basicCredentials.username || ''
   const password = basicCredentials.password ? encodeURIComponent(basicCredentials.password) : ''
   return {
@@ -15,7 +15,7 @@ export function generateBasicAuthorization(basicCredentials: AxiosBasicCredentia
   }
 }
 
-export function generateJWTAuthorization(jwt: string): Authorization {
+export function buildJWTAuthorization(jwt: string): Authorization {
   return {
     Authorization: `Bearer ${jwt}`,
   }
@@ -41,7 +41,7 @@ export function getTauriResponseType(type?: AxiosResponseType): TauriResponseTyp
   return responseType
 }
 
-export function getTauriRequestData(data?: any): Body | undefined {
+export function buildTauriRequestData(data?: any): Body | undefined {
   if (data === undefined || data === null) {
     return undefined
   }
@@ -49,11 +49,14 @@ export function getTauriRequestData(data?: any): Body | undefined {
     return Body.text(data)
   } else if (typeof data === 'object') {
     return Body.json(data)
+  } else if (data instanceof FormData) {
+    // @ts-ignore
+    return Body.form(data)
   }
   return Body.bytes(data)
 }
 
-export const generateUrl = (config: TauriAxiosRequestConfig): string => {
+export const buillRequestUrl = (config: TauriAxiosRequestConfig): string => {
   if (
     (config.baseURL === undefined || config.baseURL === null || config.baseURL.trim() === '') &&
     (config.url === undefined || config.url === null || config.url.trim() === '')
