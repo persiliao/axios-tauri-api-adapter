@@ -2,7 +2,13 @@ import { getClient, HttpVerb } from '@tauri-apps/api/http'
 import { AxiosError, AxiosPromise } from 'axios'
 import { ReasonPhrases, StatusCodes } from 'http-status-codes'
 import { TauriAxiosRequestConfig } from './type'
-import { buildBasicAuthorization, buildJWTAuthorization, buildTauriRequestData, buillRequestUrl, getTauriResponseType } from './util'
+import {
+  buildBasicAuthorization,
+  buildJWTAuthorization,
+  buildTauriRequestData,
+  buillRequestUrl,
+  getTauriResponseType,
+} from './util'
 
 export const axiosTauriApiAdapter = (config: TauriAxiosRequestConfig): AxiosPromise =>
   new Promise(async (resolve, reject) => {
