@@ -56,7 +56,7 @@ export function buildTauriRequestData(data?: any): Body | undefined {
   return Body.bytes(data)
 }
 
-export const buillRequestUrl = (config: TauriAxiosRequestConfig): string => {
+export const buildRequestUrl = (config: Omit<TauriAxiosRequestConfig, 'headers'>): string => {
   if (
     (config.baseURL === undefined || config.baseURL === null || config.baseURL.trim() === '') &&
     (config.url === undefined || config.url === null || config.url.trim() === '')

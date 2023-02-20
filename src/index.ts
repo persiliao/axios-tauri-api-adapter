@@ -6,7 +6,7 @@ import {
   buildBasicAuthorization,
   buildJWTAuthorization,
   buildTauriRequestData,
-  buillRequestUrl,
+  buildRequestUrl,
   getTauriResponseType,
 } from './util'
 
@@ -30,7 +30,7 @@ export const axiosTauriApiAdapter = (config: TauriAxiosRequestConfig): AxiosProm
         },
         responseType: getTauriResponseType(config.responseType),
         timeout: timeout,
-        url: buillRequestUrl(config),
+        url: buildRequestUrl(config),
         method: <HttpVerb>config.method?.toUpperCase(),
       })
       .then((response) => {
