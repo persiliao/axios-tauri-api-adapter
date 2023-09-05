@@ -2,6 +2,7 @@
 
 [![](https://img.shields.io/npm/v/axios-tauri-api-adapter)](https://www.npmjs.com/package/axios-tauri-api-adapter)
 [![](https://img.shields.io/npm/l/axios-tauri-api-adapter)](https://github.com/persiliao/axios-tauri-api-adapter/blob/master/LICENSE)
+[![使用WebStorm开发维护](https://img.shields.io/badge/WebStorm-提供支持-blue.svg)](https://www.jetbrains.com/?from=axios-tauri-api-adapter)
 
 Makes it easy to use Axios in Tauri App
 
