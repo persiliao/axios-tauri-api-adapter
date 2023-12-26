@@ -1,3 +1,12 @@
+## [0.2.1](https://github.com/persiliao/axios-tauri-api-adapter/compare/0.2.0...0.2.1) (2023-12-26)
+
+
+### Bug Fixes
+
+* Handle multiple set-cookie headers ([8d034d7](https://github.com/persiliao/axios-tauri-api-adapter/commit/8d034d7af545556d6c3e2b04bea77f54ccf17089))
+
+
+
 ## 0.1.3 (2022-07-25)
 
 ### Bug Fixes
