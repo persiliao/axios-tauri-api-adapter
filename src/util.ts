@@ -45,13 +45,13 @@ export function buildTauriRequestData(data?: any): Body | undefined {
   if (data === undefined || data === null) {
     return undefined
   }
-  if (typeof data === 'string') {
+  if (data instanceof FormData) {
+    // @ts-ignore
+    return Body.form(data)
+  } else if (typeof data === 'string') {
     return Body.text(data)
   } else if (typeof data === 'object') {
     return Body.json(data)
-  } else if (data instanceof FormData) {
-    // @ts-ignore
-    return Body.form(data)
   }
   return Body.bytes(data)
 }
