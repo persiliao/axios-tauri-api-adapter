@@ -44,27 +44,24 @@ export function getTauriResponseType(type?: AxiosResponseType): TauriResponseTyp
 }
 
 export function buildTauriRequestData(data?: any): Body | undefined {
-  
-  if (data === undefined || data === null)
-    return undefined;
-
-  else if (TEXT_SERIALIZABLE_TYPES.has(typeof data))
-    return Body.text(`${data}`); // string casting just in case
-
-  else if (data instanceof FormData)
-    // @ts-ignore  
-    return Body.form(data);
-
+  if (data === undefined || data === null) {
+    return undefined
+  } else if (TEXT_SERIALIZABLE_TYPES.has(typeof data)) {
+    return Body.text(`${data}`) // string casting just in case
+  } else if (data instanceof FormData) {
+    // @ts-ignore
+    return Body.form(data)
+  }
   // Checking if is `TypedArray` as it describes an array-like view
   // of an underlying binary data buffer.
   // @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/TypedArray
-  else if (isTypedArray(data))
-    return Body.bytes(data);
+  else if (isTypedArray(data)) {
+    return Body.bytes(data)
+  } else if (typeof data === 'object') {
+    return Body.json(data)
+  }
 
-  else if (typeof data === "object")
-    return Body.json(data);
-
-  return undefined;
+  return undefined
 }
 
 export const buildRequestUrl = (config: Omit<TauriAxiosRequestConfig, 'headers'>): string => {
