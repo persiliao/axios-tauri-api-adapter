@@ -4,7 +4,6 @@ import buildUrl, { IQueryParams } from 'build-url-ts'
 import URLParse from 'url-parse'
 import { Authorization, TauriAxiosRequestConfig } from './type'
 import { TEXT_SERIALIZABLE_TYPES } from './constants'
-import { isTypedArray } from 'util/types'
 
 export const base64Decode = (str: string): string => Buffer.from(str, 'base64').toString('binary')
 export const base64Encode = (str: string): string => Buffer.from(str, 'binary').toString('base64')
@@ -55,8 +54,8 @@ export function buildTauriRequestData(data?: any): Body | undefined {
   // Checking if is `TypedArray` as it describes an array-like view
   // of an underlying binary data buffer.
   // @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/TypedArray
-  else if (isTypedArray(data)) {
-    return Body.bytes(data)
+  else if (ArrayBuffer.isView(data)) {
+    return Body.bytes(data.buffer)
   } else if (typeof data === 'object') {
     return Body.json(data)
   }
