@@ -8,7 +8,7 @@ import {
   buildTauriRequestData,
   buildRequestUrl,
   getTauriResponseType,
-} from './util'
+} from './util.js'
 
 export const axiosTauriApiAdapter = (config: TauriAxiosRequestConfig): AxiosPromise =>
   new Promise(async (resolve, reject) => {
