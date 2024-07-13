@@ -1,6 +1,5 @@
 import { Body, ResponseType as TauriResponseType } from '@tauri-apps/api/http'
 import { AxiosBasicCredentials, ResponseType as AxiosResponseType } from 'axios'
-import buildUrl, { IQueryParams } from 'build-url-ts'
 import URLParse from 'url-parse'
 import { Authorization, TauriAxiosRequestConfig } from './type'
 
@@ -64,7 +63,7 @@ export const buildRequestUrl = (config: Omit<TauriAxiosRequestConfig, 'headers'>
     throw new Error('config.baseURL or config.url must be specified')
   }
   if (config.baseURL) {
-    return buildUrl(config.baseURL, { path: config.url, queryParams: config.params })
+    return buildUrl(config.baseURL, { path: config.url as string, queryParams: config.params })
   }
   const url = config.url ? config.url : ''
   let urlObj = URLParse(url, true)
@@ -72,11 +71,13 @@ export const buildRequestUrl = (config: Omit<TauriAxiosRequestConfig, 'headers'>
   const params = urlObj.query
   urlObj.set('pathname', '')
   urlObj.set('query', '')
-  return buildUrl(urlObj.toString(), { path: path, queryParams: mergeQueryParams(params, config.params) })
+  return buildUrl(urlObj.toString(), { path: path as string, queryParams: { ...params, ...config.params } })
 }
 
-export function mergeQueryParams(...queryParams: IQueryParams[]): IQueryParams | undefined {
-  let params: IQueryParams = {}
-  queryParams.forEach((queryParam) => Object.assign(params, queryParam))
-  return Object.keys(params).length === 0 ? undefined : params
+function buildUrl( url: string, obj: { path: string, queryParams: { [key: string]: string } } ){
+
+  let params = new URLSearchParams(obj.queryParams).toString()
+  return `${url}${obj.path}${params.length ? `?${params}` : ''}`
+
 }
+
