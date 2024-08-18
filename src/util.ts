@@ -81,10 +81,7 @@ export const buildRequestUrl = (config: Omit<TauriAxiosRequestConfig, 'headers'>
   return buildUrl(urlObj.toString(), { path: path as string, queryParams: { ...params, ...config.params } })
 }
 
-function buildUrl( url: string, obj: { path: string, queryParams: { [key: string]: string } } ){
-
+function buildUrl(url: string, obj: { path: string; queryParams: { [key: string]: string } }) {
   let params = new URLSearchParams(obj.queryParams).toString()
   return `${url}${obj.path}${params.length ? `?${params}` : ''}`
-
 }
-
