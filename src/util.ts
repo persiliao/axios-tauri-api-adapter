@@ -74,11 +74,14 @@ export const buildRequestUrl = (config: Omit<TauriAxiosRequestConfig, 'headers'>
     throw new Error('config.baseURL or config.url must be specified')
   }
   if (config.baseURL) {
-    return buildUrl(config.baseURL, { path: isNil(config.url) ? '' : config.url as string, queryParams: config.params })
+    return buildUrl(config.baseURL, {
+      path: isNil(config.url) ? '' : (config.url as string),
+      queryParams: config.params,
+    })
   }
   const url = config.url ? config.url : ''
   let urlObj = URLParse(url, true)
-  const path = (urlObj.pathname === '/' || isNil(urlObj.pathname)) ? '' : urlObj.pathname
+  const path = urlObj.pathname === '/' || isNil(urlObj.pathname) ? '' : urlObj.pathname
   const params = urlObj.query
   urlObj.set('pathname', '')
   urlObj.set('query', '')
