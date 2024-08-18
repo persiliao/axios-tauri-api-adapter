@@ -3,6 +3,7 @@ import { AxiosBasicCredentials, ResponseType as AxiosResponseType } from 'axios'
 import buildUrl, { IQueryParams } from 'build-url-ts'
 import URLParse from 'url-parse'
 import { Authorization, TauriAxiosRequestConfig } from './type'
+import { TEXT_SERIALIZABLE_TYPES } from './constants'
 
 export const base64Decode = (str: string): string => Buffer.from(str, 'base64').toString('binary')
 export const base64Encode = (str: string): string => Buffer.from(str, 'binary').toString('base64')
@@ -44,16 +45,22 @@ export function getTauriResponseType(type?: AxiosResponseType): TauriResponseTyp
 export function buildTauriRequestData(data?: any): Body | undefined {
   if (data === undefined || data === null) {
     return undefined
-  }
-  if (typeof data === 'string') {
-    return Body.text(data)
-  } else if (typeof data === 'object') {
-    return Body.json(data)
+  } else if (TEXT_SERIALIZABLE_TYPES.has(typeof data)) {
+    return Body.text(`${data}`) // string casting just in case
   } else if (data instanceof FormData) {
     // @ts-ignore
     return Body.form(data)
   }
-  return Body.bytes(data)
+  // Checking if is `TypedArray` as it describes an array-like view
+  // of an underlying binary data buffer.
+  // @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/TypedArray
+  else if (ArrayBuffer.isView(data)) {
+    return Body.bytes(data.buffer)
+  } else if (typeof data === 'object') {
+    return Body.json(data)
+  }
+
+  return undefined
 }
 
 export const buildRequestUrl = (config: Omit<TauriAxiosRequestConfig, 'headers'>): string => {
