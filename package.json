@@ -1,6 +1,6 @@
 {
   "name": "axios-tauri-api-adapter",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "Makes it easy to use Axios in Tauri App",
   "type": "module",
   "keywords": [
@@ -22,6 +22,9 @@
   "author": "Persi.Liao",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
   "scripts": {
     "build": "vite build",
     "format": "prettier --write \"src/**\"",
