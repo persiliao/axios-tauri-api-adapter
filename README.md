@@ -2,9 +2,10 @@
 
 [![](https://img.shields.io/npm/v/axios-tauri-api-adapter)](https://www.npmjs.com/package/axios-tauri-api-adapter)
 [![](https://img.shields.io/npm/l/axios-tauri-api-adapter)](https://github.com/persiliao/axios-tauri-api-adapter/blob/master/LICENSE)
-[![使用WebStorm开发维护](https://img.shields.io/badge/WebStorm-提供支持-blue.svg)](https://www.jetbrains.com/?from=axios-tauri-api-adapter)
 
-Makes it easy to use Axios in Tauri App
+Makes it easy to use Axios in Tauri App, Adapted for Tauri App 2.0.0
+
+v1 version see https://github.com/persiliao/axios-tauri-api-adapter/tree/v1
 
 # Installation
 
@@ -24,24 +25,21 @@ const client = axios.create({ adapter: axiosTauriApiAdapter });
 
 ### **Tauri App**
 
-Add the following configuration to the `tauri.config.json` [See Details](https://tauri.app/v1/api/config#httpallowlistconfig)
+Configure the allowed URLs [Tauri App HTTP client](https://v2.tauri.app/plugin/http-client/#usage)
 
 ```json5
 {
-  "tauri": {
-    "allowlist": {
-      "http": {
-        "all": true, // Use this flag to enable all HTTP API features.
-        "request": true, // Allows making HTTP requests.
-        "scope": ["https://example.com/*"] // access scope for the HTTP APIs.
-      }
+  "permissions": [
+    {
+      "identifier": "http:default",
+      "allow": [{ "url": "https://*.tauri.app" }],
+      "deny": [{ "url": "https://private.tauri.app" }]
     }
-  }
+  ]
 }
 ```
 
 # Features
-- HTTP Requests use `@tauri-apps/api/http` instead of `XHR(XMLHttpRequest)`
 - Add `config.jwt` It's going to add JWT to the header
 
 # Resources
@@ -49,14 +47,3 @@ Add the following configuration to the `tauri.config.json` [See Details](https:/
 * [Changelog](https://github.com/persiliao/axios-tauri-api-adapter/blob/master/CHANGELOG.md)
 * [Contributing Guide](https://github.com/persiliao/axios-tauri-api-adapter/blob/master/CONTRIBUTING.md)
 * [Code of Conduct](https://github.com/persiliao/axios-tauri-api-adapter/blob/master/CODE_OF_CONDUCT.md)
-
-## License
-
-**MIT License**
-
-## JetBrains Support
-
-**The project has always been developed in the Idea integrated development environment under JetBrains, based on the
-free JetBrains Open Source license(s) genuine free license, I would like to express my gratitude here**
-
-![Jetbrains](https://github.com/persiliao/static-resources/blob/master/jetbrains-logos/jetbrains-variant-4.svg)

@@ -1,3 +1,12 @@
+# [2.0.0](https://github.com/persiliao/axios-tauri-api-adapter/compare/0.2.2...2.0.0) (2024-10-11)
+
+
+### Features
+
+* Adapted for Tauri App 2.0.0 ([889d0c0](https://github.com/persiliao/axios-tauri-api-adapter/commit/889d0c0d76651ed3fc1303226c4bc3d440e74deb))
+
+
+
 ## [0.2.2](https://github.com/persiliao/axios-tauri-api-adapter/compare/0.2.0...0.2.2) (2024-08-18)
 
 
