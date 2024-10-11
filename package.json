@@ -1,6 +1,6 @@
 {
   "name": "axios-tauri-api-adapter",
-  "version": "0.2.2",
+  "version": "2.0.3",
   "description": "Makes it easy to use Axios in Tauri App",
   "type": "module",
   "keywords": [
@@ -20,39 +20,31 @@
   },
   "license": "MIT",
   "author": "Persi.Liao",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "lib/**/*"
+    "dist/**"
   ],
   "scripts": {
-    "build": "tsc",
-    "build-prepare": "rimraf lib",
-    "format": "prettier --write \"src/**/*.ts\"",
-    "preinstall": "npx only-allow pnpm",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "prepare": "run-s format build-prepare build",
-    "test": "jest --config jestconfig.json"
+    "build": "vite build",
+    "format": "prettier --write \"src/**\"",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "dependencies": {
-    "@tauri-apps/api": "^1.6.0",
-    "axios": "^1.7.4",
+    "axios": "^1.7.7",
     "http-status-codes": "^2.3.0",
-    "url-parse": "^1.5.10"
+    "@tauri-apps/plugin-http": "^2.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^28.1.8",
-    "@types/node": "^18.19.44",
-    "@types/url-parse": "^1.4.11",
-    "conventional-changelog-cli": "^2.2.2",
-    "jest": "^28.1.3",
-    "jest-environment-jsdom": "^28.1.3",
-    "npm-run-all": "^4.1.5",
-    "only-allow": "^1.2.1",
-    "prettier": "^2.8.8",
-    "rimraf": "^3.0.2",
-    "ts-jest": "^28.0.8",
-    "typescript": "^4.9.5",
-    "uuid-generator-ts": "^1.1.0"
+    "@types/jest": "^29.5.13",
+    "@types/node": "^22.7.5",
+    "conventional-changelog-cli": "^5.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.8",
+    "vite-plugin-static-copy": "^2.0.0"
   },
   "engines": {
     "node": ">=16",

@@ -1,6 +1,10 @@
 # Dependency directories
+dist
 node_modules/
-lib/
+
+package-lock.json
+yarn.lock
+
 # TypeScript cache
 *.tsbuildinfo
 
