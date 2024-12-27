@@ -53,7 +53,7 @@ export default (config) => {
         ...(config.auth && buildBasicAuthorization(config.auth)),
         ...(config.jwt && buildJWTAuthorization(config.jwt)),
       },
-      connectTimeout: config.timeout,
+      connectTimeout: config.timeout < 1000 ? undefined: config.timeout,
       maxRedirections: config.maxRedirects,
       body: config.data,
     }
