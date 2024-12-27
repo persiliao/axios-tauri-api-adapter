@@ -46,7 +46,6 @@ const transform = (data, type) => {
 export default (config) => {
   return new Promise((resolve, reject) => {
     const requestUrl = buildURL(buildFullPath(config.baseURL, config.url), config.params, config.paramsSerializer)
-    console.log('axios.config', config)
     const requestConfig = {
       method: config.method,
       headers: {
@@ -58,51 +57,47 @@ export default (config) => {
       maxRedirections: config.maxRedirects,
       body: config.data,
     }
-    fetch(requestUrl, requestConfig).then((response) => {
-      const statusText = ReasonPhrases[StatusCodes[response.status]]
-      const responseType = config.responseType || 'json'
-      if (response.ok) {
-        transform(response.body, responseType).then(body => {
-          return resolve({
-            data: body,
-            status: response.status,
-            statusText: statusText,
-            headers: {
-              ...response.headers,
-            },
-            config: config,
+    fetch(requestUrl, requestConfig)
+      .then((response) => {
+        const statusText = ReasonPhrases[StatusCodes[response.status]]
+        const responseType = config.responseType || 'json'
+        if (response.ok) {
+          transform(response.body, responseType).then((body) => {
+            return resolve({
+              data: body,
+              status: response.status,
+              statusText: statusText,
+              headers: {
+                ...response.headers,
+              },
+              config: config,
+            })
           })
-        })
-      } else {
-        transform(response.body, responseType).then(body => {
-          return reject(
+        } else {
+          transform(response.body, responseType).then((body) => {
+            return reject(
               new AxiosError(
-                  'Request failed with status code ' + response.status,
-                  [AxiosError.ERR_BAD_REQUEST, AxiosError.ERR_BAD_RESPONSE][Math.floor(response.status / 100) - 4],
-                  config,
-                  {
-                    url: requestUrl,
-                    ...requestConfig
-                  },
-                  {
-                    config: config,
-                    data: body,
-                    headers: response.headers,
-                    status: response.status,
-                    statusText: statusText,
-                  },
+                'Request failed with status code ' + response.status,
+                [AxiosError.ERR_BAD_REQUEST, AxiosError.ERR_BAD_RESPONSE][Math.floor(response.status / 100) - 4],
+                config,
+                {
+                  url: requestUrl,
+                  ...requestConfig,
+                },
+                {
+                  config: config,
+                  data: body,
+                  headers: response.headers,
+                  status: response.status,
+                  statusText: statusText,
+                },
               ),
-          )
-        })
-      }
-    }).catch(reason => {
-      return reject(
-          new AxiosError(
-              reason,
-              AxiosError.ERR_BAD_REQUEST,
-              config,
-          ),
-      )
-    })
+            )
+          })
+        }
+      })
+      .catch((reason) => {
+        return reject(new AxiosError(reason, AxiosError.ERR_BAD_REQUEST, config))
+      })
   })
 }
