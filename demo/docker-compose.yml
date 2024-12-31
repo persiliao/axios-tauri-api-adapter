@@ -1,0 +1,6 @@
+services:
+  http-echo:
+    command: '-text="{\"name\":\"Hello World\"}"'
+    image: hashicorp/http-echo
+    ports:
+      - '5678:5678'
