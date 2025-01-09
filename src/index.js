@@ -22,13 +22,13 @@ const buildJWTAuthorization = (token) => {
 
 const transform = (data, type) => {
   switch (type) {
-    case 'arrayBuffer': {
+    case 'arraybuffer': {
       return new Response(data).arrayBuffer()
     }
     case 'blob': {
       return new Response(data).blob()
     }
-    case 'formData': {
+    case 'formdata': {
       return new Response(data).formData()
     }
     case 'json': {
