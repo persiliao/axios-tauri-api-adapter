@@ -1,11 +1,26 @@
 <script setup lang="ts">
 import axios from 'axios';
 import axiosTauriApiAdapter from 'axios-tauri-api-adapter';
-import { ref } from 'vue';
 const client = axios.create({
   adapter: axiosTauriApiAdapter,
   baseURL: 'http://127.0.0.1:5678'
 });
+
+const httpOptions = () => {
+  client.options("/").then(res => {
+    console.log('options res', res)
+  }).catch(err => {
+    console.log('options error', err)
+  })
+}
+
+const httpHead = () => {
+  client.head("/").then(res => {
+    console.log('head res', res)
+  }).catch(err => {
+    console.log('head error', err)
+  })
+}
 
 const httpGet = () => {
   client.get("/").then(res => {
@@ -59,6 +74,8 @@ const httpDelete = () => {
     <p>Click the following button to send the corresponding HTTP request, you can console view the relevant logs in the development tools.</p>
 
     <div class="row">
+      <button @click="httpOptions">Options</button>
+      <button @click="httpHead">HEAD</button>
       <button @click="httpGet">GET</button>
       <button @click="httpPost">POST</button>
       <button @click="httpPut">PUT</button>
