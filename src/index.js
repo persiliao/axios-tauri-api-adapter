@@ -20,22 +20,22 @@ const buildJWTAuthorization = (token) => {
   }
 }
 
-const transform = (data, type) => {
+const transform = (response, type) => {
   switch (type) {
     case 'arraybuffer': {
-      return new Response(data).arrayBuffer()
+      return response.arrayBuffer()
     }
     case 'blob': {
-      return new Response(data).blob()
+      return response.blob()
     }
     case 'formdata': {
-      return new Response(data).formData()
+      return response.formData()
     }
     case 'json': {
-      return new Response(data).json()
+      return response.json()
     }
     case 'text': {
-      return new Response(data).text()
+      return response.text()
     }
     default: {
       throw new Error('Response type unsupported type: ' + type)
@@ -63,7 +63,7 @@ export default (config) => {
         const responseType = config.responseType || 'json'
         if (response.ok) {
           if (response.body !== null) {
-            transform(response.body, responseType).then(body => {
+            transform(response, responseType).then(body => {
               return resolve({
                 data: body,
                 status: response.status,
@@ -94,7 +94,7 @@ export default (config) => {
           }
         } else {
           if (response.body !== null) {
-            transform(response.body, responseType).then(body => {
+            transform(response, responseType).then(body => {
               return reject(
                 new AxiosError(
                   'Request failed with status code ' + response.status,
