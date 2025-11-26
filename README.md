@@ -47,3 +47,7 @@ Configure the allowed URLs [Tauri App HTTP client](https://v2.tauri.app/plugin/h
 * [Changelog](https://github.com/persiliao/axios-tauri-api-adapter/blob/master/CHANGELOG.md)
 * [Contributing Guide](https://github.com/persiliao/axios-tauri-api-adapter/blob/master/CONTRIBUTING.md)
 * [Code of Conduct](https://github.com/persiliao/axios-tauri-api-adapter/blob/master/CODE_OF_CONDUCT.md)
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=persiliao/axios-tauri-api-adapter&type=date&legend=top-left)](https://www.star-history.com/#persiliao/axios-tauri-api-adapter&type=date&legend=top-left)
